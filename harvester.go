@@ -60,6 +60,7 @@ func (h *Harvester) Harvest(output chan *FileEvent) {
           log.Printf("File truncated, seeking to beginning: %s\n", h.Path)
           h.file.Seek(0, os.SEEK_SET)
           h.Offset = 0
+          os.Exit(0)
         } else if age := time.Since(last_read_time); age > h.FileConfig.deadtime {
           // if last_read_time was more than dead time, this file is probably
           // dead. Stop watching it.
